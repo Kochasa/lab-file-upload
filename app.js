@@ -18,7 +18,7 @@ const bindUserToViewLocals = require('./configs/user-locals.config');
 // Routers
 const indexRouter = require('./routes/index.routes');
 const authRouter = require('./routes/auth.routes');
-
+const postRouter = require("./routes/post.routes");
 
 const app = express();
 require('./configs/session.config')(app);
