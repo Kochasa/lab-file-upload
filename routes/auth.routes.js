@@ -6,6 +6,8 @@ const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 const User = require('../models/User.model');
 const mongoose = require('mongoose');
+const multer  = require('multer');
+const upload = multer({ dest: './public/uploads/profile/' });
 
 const routeGuard = require('../configs/route-guard.config');
 
@@ -17,7 +19,7 @@ const routeGuard = require('../configs/route-guard.config');
 router.get('/signup', (req, res) => res.render('auth/signup'));
 
 // .post() route ==> to process form data
-router.post('/signup', (req, res, next) => {
+router.post('/signup',upload.single("profile-picture"),(req, res, next) => {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
@@ -41,6 +43,7 @@ router.post('/signup', (req, res, next) => {
       return User.create({
         // username: username
         username,
+        picture,
         email,
         // passwordHash => this is the key from the User model
         //     ^
