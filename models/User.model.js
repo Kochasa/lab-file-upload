@@ -1,6 +1,16 @@
 // models/User.model.js
 
 const { Schema, model } = require('mongoose');
+const Post = require("./Post.model");
+
+const pictureSchema = new Schema({
+  name: String,
+  path: String,
+  originalName: String
+ 
+}, {
+  timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
+});
 
 const userSchema = new Schema(
   {
@@ -23,13 +33,11 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required.']
     },
-  picture: {
-    type: String
-  }
-},
+    profilePicture: pictureSchema
+  },
   {
-    timestamps: true
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
   }
 );
 
-module.exports = model('User', userSchema);
+module.exports = model('User', userSchema, 'users');

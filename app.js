@@ -9,6 +9,8 @@ const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
 const mongoose = require('mongoose');
 
+
+
 // Set up the database
 require('./configs/db.config');
 
@@ -18,7 +20,6 @@ const bindUserToViewLocals = require('./configs/user-locals.config');
 // Routers
 const indexRouter = require('./routes/index.routes');
 const authRouter = require('./routes/auth.routes');
-const postRouter = require("./routes/post.routes");
 
 const app = express();
 require('./configs/session.config')(app);
@@ -58,3 +59,5 @@ app.use((error, req, res) => {
 });
 
 module.exports = app;
+
+app.listen(3000, console.log("Up and running"));
